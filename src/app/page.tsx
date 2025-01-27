@@ -1,9 +1,10 @@
-// import Image from "next/image";
+import CalendarItem from "@/components/CalenderItem";
+
 
 export default function Home() {
   return (
-    <h1 className="text-3xl font-bold text-blue">
-    Hello world!
-  </h1>
+    <>
+    <CalendarItem/>
+    </>
   );
 }
