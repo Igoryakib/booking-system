@@ -15,7 +15,7 @@ const Home = () => {
   }, []);
   const handleView = useCallback((inView: boolean) => {
     if (inView) {
-      generateWeek(setDays);
+      setTimeout(() => generateWeek(setDays), 0);
     }
   }, []);
   return (
