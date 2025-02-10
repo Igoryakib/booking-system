@@ -4,7 +4,7 @@ import { ICalendarDay } from "@/types/interfaces";
 
 const CalendarItem:FC<ICalendarDay> = ({day, date, slots}) => {
     return(
-        <div className="mw-[285] h-[184] border-r-2 border-b-2 border-black p-[10]">
+        <div className="mw-[285] h-[184] border-r-2 border-b-2 border-gray-300 p-[10]">
             <div className="flex items-center justify-between mb-[10]">
                 <h4 className="text-black text-2xl font-bold font-sans">{day}</h4>
                 <h4 className="text-black text-2xl font-bold font-sans">{date}</h4>

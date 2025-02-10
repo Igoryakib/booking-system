@@ -2,29 +2,28 @@
 import { useState, useEffect, useCallback } from "react";
 import ListDays from "@/components/ListDays";
 import { ICalendarDay } from "@/types/interfaces";
-import { generateWeek } from "@/utils/generateFunc";
+import { generateMonth } from "@/utils/generateMonth";
 import { InView } from "react-intersection-observer";
 
 
 const Home = () => {
   const [days, setDays] = useState<ICalendarDay[][]>([]);
   useEffect(() => {
-    generateWeek(setDays);
-    generateWeek(setDays);
-    generateWeek(setDays);
+    generateMonth(setDays);
   }, []);
   const handleView = useCallback((inView: boolean) => {
     if (inView) {
-      setTimeout(() => generateWeek(setDays), 0);
+      setTimeout(() => generateMonth(setDays), 0);
     }
   }, []);
   return (
-    <>
+    <main className="mt-[60] mr-auto ml-auto">
       <ListDays days={days.map(item => item)} />
-      <InView onChange={handleView}>
+      {/* <InView onChange={handleView}>
         {({ ref }) => <span ref={ref}>.</span>}
-      </InView>
-    </>
+      </InView> */}
+      <button type="button" onClick={() => generateMonth(setDays)}>Generate</button>
+    </main>
   );
 }
 

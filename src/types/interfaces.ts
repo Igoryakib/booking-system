@@ -1,3 +1,4 @@
+
 export interface ISlot {
     status?: boolean,
     text: string
@@ -10,5 +11,5 @@ export interface ICalendarDay {
 }
 
 export interface IListDays {
-    days: ICalendarDay[][]
+    days: ICalendarDay[][],
 }

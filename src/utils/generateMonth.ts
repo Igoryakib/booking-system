@@ -1,14 +1,30 @@
 import { ICalendarDay } from "@/types/interfaces";
 import { Dispatch, SetStateAction } from "react";
 
-export const generateWeek = (
+export const generateMonth = (
   setDays: Dispatch<SetStateAction<ICalendarDay[][]>>
 ): void => {
   const generatedDays: ICalendarDay[] = [];
   const today = new Date();
-  for (let i = 0; i < 7; i++) {
+  const month = today.getMonth() + 1;
+  let counterDaysOfMonth: number;
+  switch(month) {
+    case 2:
+      counterDaysOfMonth = 28;
+      break;
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+        counterDaysOfMonth = 30;
+    break;
+    default:
+      counterDaysOfMonth = 31;
+    break;
+  }
+  for (let i = 1; i <= counterDaysOfMonth; i++) {
     const futureDate = new Date();
-    futureDate.setDate(today.getDate() + i);
+    futureDate.setDate(i);
 
     const newDay = {
       day: futureDate.toDateString().slice(0, 3),
