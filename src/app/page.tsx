@@ -12,15 +12,16 @@ const Home = () => {
     generateMonth(setDays);
   }, []);
   const handleView = useCallback((inView: boolean) => {
+    console.log(inView)
     if (inView) {
-      setTimeout(() => generateMonth(setDays), 0);
+      // setTimeout(() => generateMonth(setDays), 0);
     }
   }, []);
   return (
     <main className="mt-[60] mr-auto ml-auto">
       <ListDays days={days.map(item => item)} />
       <InView onChange={handleView}>
-        {({ ref }) => <span ref={ref}>.</span>}
+        {({ ref }) => <span className=" block mt-[40]" ref={ref}>.</span>}
       </InView>
     </main>
   );
