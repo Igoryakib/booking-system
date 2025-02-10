@@ -19,10 +19,9 @@ const Home = () => {
   return (
     <main className="mt-[60] mr-auto ml-auto">
       <ListDays days={days.map(item => item)} />
-      {/* <InView onChange={handleView}>
+      <InView onChange={handleView}>
         {({ ref }) => <span ref={ref}>.</span>}
-      </InView> */}
-      <button type="button" onClick={() => generateMonth(setDays)}>Generate</button>
+      </InView>
     </main>
   );
 }
