@@ -8,22 +8,30 @@ import { InView } from "react-intersection-observer";
 
 const Home = () => {
   const [days, setDays] = useState<ICalendarDay[][]>([]);
+  const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
   useEffect(() => {
-    generateMonth(setDays);
+    setDays([generateMonth()])
   }, []);
   const handleView = useCallback((inView: boolean) => {
-    console.log(inView)
     if (inView) {
-      // setTimeout(() => generateMonth(setDays), 0);
+      setMonth((prevMonth) => {
+        const nextMonth = prevMonth + 1;
+        setDays((prevDays) => [...prevDays, generateMonth(nextMonth)])
+        // window.scrollTo({ top: document.body.scrollHeight / 0.5, behavior: "smooth" });
+
+        return nextMonth;
+      });
     }
   }, []);
   return (
-    <main className="mt-[60] mr-auto ml-auto">
-      <ListDays days={days.map(item => item)} />
-      <InView onChange={handleView}>
+    <>
+      <main className="mt-[60] mr-auto ml-auto">
+        <ListDays days={days.map(item => item)} />
+        <InView onChange={handleView}>
         {({ ref }) => <span className=" block mt-[40]" ref={ref}>.</span>}
       </InView>
-    </main>
+      </main>
+    </>
   );
 }
 
