@@ -1,6 +1,8 @@
+
 import type { Metadata } from "next";
 import { Inria_Sans } from "next/font/google";
 import "./globals.css";
+import StoreProvider from "@/redux/StoreProvider";
 
 const InriaSans = Inria_Sans({
   weight: ["300", "400", "700"],
@@ -22,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${InriaSans.variable} antialiased`}>
+      <StoreProvider>
         <div id="root">{children}</div>
+      </StoreProvider>
       </body>
     </html>
   );

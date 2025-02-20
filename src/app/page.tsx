@@ -1,37 +1,30 @@
 'use client'
-import { useState, useEffect, useCallback } from "react";
+import { useCallback } from "react";
 import ListDays from "@/components/ListDays";
 import { ICalendarDay } from "@/types/interfaces";
-import { generateMonth } from "@/utils/generateMonth";
 import { InView } from "react-intersection-observer";
+import { monthCalendar } from "@/redux/actions";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 
 
 const Home = () => {
-  const [days, setDays] = useState<ICalendarDay[][]>([]);
-  const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
-  useEffect(() => {
-    setDays([generateMonth()])
-  }, []);
+  const month = useAppSelector(state => state.calendarData.currentMonth)
+  const days = useAppSelector(state => state.calendarData.days)
+  const dispatch = useAppDispatch();
   const handleView = useCallback((inView: boolean) => {
     if (inView) {
-      setMonth((prevMonth) => {
-        const nextMonth = prevMonth + 1;
-        setDays((prevDays) => [...prevDays, generateMonth(nextMonth)])
-        // window.scrollTo({ top: document.body.scrollHeight / 0.5, behavior: "smooth" });
-
-        return nextMonth;
-      });
+      dispatch(monthCalendar(month + 1));
+      window.scrollTo({ top: document.body.scrollHeight / 0.5, behavior: "smooth" });
     }
-  }, []);
+  }, [dispatch, month]);
+ 
   return (
-    <>
       <main className="mt-[60] mr-auto ml-auto">
-        <ListDays days={days.map(item => item)} />
+        <ListDays days={days.map((item: ICalendarDay[]) => item)} />
         <InView onChange={handleView}>
-        {({ ref }) => <span className=" block mt-[40]" ref={ref}>.</span>}
-      </InView>
+          {({ ref }) => <span className=" block mt-[40]" ref={ref}>.</span>}
+        </InView>
       </main>
-    </>
   );
 }
 

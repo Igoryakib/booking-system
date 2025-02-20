@@ -13,6 +13,7 @@ export const generateMonth = (nextPreviousMonth?: number): ICalendarDay[] => {
       day: futureDate.toLocaleDateString("en-US", { weekday: "short" }),
       date: futureDate.getDate().toString().padStart(2, "0"),
       month: i === 1 ? futureDate.toLocaleDateString("en-US", { month: "short" }) : '',
+      year: futureDate.getFullYear(),
       spaceRow: i === counterDaysOfMonth ? true : false, 
       slots: [{ text: "Manager 1", status: false }],
     };
